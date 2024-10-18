@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cădar_Raul_Lab2.Data;
 using Cădar_Raul_Lab2.Models;
 
-namespace Cădar_Raul_Lab2.Pages.Books
+namespace Cădar_Raul_Lab2.Pages.Authors
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Cădar_Raul_Lab2.Pages.Books
             _context = context;
         }
 
-        public Book Book { get; set; } = default!;
+        public Author Author { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,18 +28,14 @@ namespace Cădar_Raul_Lab2.Pages.Books
                 return NotFound();
             }
 
-            Book = await _context.Book
-            .Include(b => b.Author)
-            .FirstOrDefaultAsync(m => m.ID == id);
-
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
+            if (author == null)
             {
                 return NotFound();
             }
             else
             {
-                Book = book;
+                Author = author;
             }
             return Page();
         }

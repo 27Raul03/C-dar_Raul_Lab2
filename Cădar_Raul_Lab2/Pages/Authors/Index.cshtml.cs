@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cădar_Raul_Lab2.Data;
 using Cădar_Raul_Lab2.Models;
 
-namespace Cădar_Raul_Lab2.Pages.Books
+namespace Cădar_Raul_Lab2.Pages.Authors
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace Cădar_Raul_Lab2.Pages.Books
             _context = context;
         }
 
-        public IList<Book> Book { get;set; } = default!;
+        public IList<Author> Author { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Book = await _context.Book.Include(b => b.Publisher).Include(b => b.Author).ToListAsync();
+            Author = await _context.Author.ToListAsync();
         }
     }
 }
